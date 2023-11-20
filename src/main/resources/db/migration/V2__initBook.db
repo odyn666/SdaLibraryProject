@@ -1,0 +1,11 @@
+-- Drop the table if it exists
+DROP TABLE IF EXISTS book;
+
+-- Create the book table
+CREATE TABLE book (
+    title VARCHAR(100) NOT NULL,
+    authors VARCHAR(100) NOT NULL,
+    genres VARCHAR(100) NOT NULL,
+    pages INTEGER,
+    alley VARCHAR(100)
+    )

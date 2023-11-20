@@ -1,6 +1,7 @@
 package pl.khas.SdaLibraryProject.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,9 +17,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book {
+    @Id
+    int id;
     private String title;
-    private Author authors;
-    private Set<Genre> genres;
+    private String authors;
+    private String genres;
     private int pages;
-    private Alley alley;
+    private String alley;
 }
