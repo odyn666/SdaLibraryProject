@@ -3,9 +3,11 @@ DROP TABLE IF EXISTS book;
 
 -- Create the book table
 CREATE TABLE book (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
     authors VARCHAR(100) NOT NULL,
     genres VARCHAR(100) NOT NULL,
     pages INTEGER,
-    alley VARCHAR(100)
+    alley VARCHAR(100),
+    isRented BIT
     )

@@ -1,8 +1,7 @@
 package pl.khas.SdaLibraryProject.controllers;
 
-import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.khas.SdaLibraryProject.model.Person;
@@ -13,26 +12,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/person")
+@RequiredArgsConstructor
+@Log4j2
  class PersonController {
     private final PersonRepository personRepository;
-    private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
-
-    public PersonController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
-
     @PostMapping
-    ResponseEntity<Person>createPerson(@RequestBody @Valid Person toCreate)
+    ResponseEntity<Person>createPerson(@RequestBody Person toCreate)
     {
         Person result = personRepository.save(toCreate);
         ResponseEntity<Person> created = ResponseEntity.created(URI.create("/" + result.getId())).body(result);
-        logger.info("created new object " + result.toString());
+        log.info("created new object " + result.toString());
         return created;
     }
 
     @GetMapping(params = {"!sort"})
     ResponseEntity<List<Person>> readAllTasks() {
-        logger.warn("Exposing all the Persons!");
+        log.warn("Exposing all the Persons!");
         return ResponseEntity.ok(personRepository.findAll());
     }
 
@@ -45,7 +40,7 @@ import java.util.List;
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody @Valid Person toUpdate) {
+    ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody Person toUpdate) {
         if (!personRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -56,6 +51,4 @@ import java.util.List;
                 });
         return ResponseEntity.noContent().build();
     }
-
-
 }
