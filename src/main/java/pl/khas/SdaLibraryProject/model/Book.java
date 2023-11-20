@@ -7,20 +7,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.pl.PESEL;
+
+import java.util.Set;
 
 @Entity
-@Table(name="person")
+@Table(name = "book")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
+public class Book {
     @Id
-    private int id;
-    private String name;
-    private String lastName;
-    private String pesel;
-    private int age;
-    private boolean didRent;
+    int id;
+    private String title;
+    private String authors;
+    private String genres;
+    private int pages;
+    private String alley;
 }

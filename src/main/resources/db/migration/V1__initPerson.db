@@ -9,4 +9,5 @@ CREATE TABLE person (
     pesel VARCHAR(100) NOT NULL,
     age INT,
     didRent BIT
+
 )
