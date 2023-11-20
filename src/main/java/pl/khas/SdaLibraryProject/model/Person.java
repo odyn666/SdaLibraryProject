@@ -7,10 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.pl.PESEL;
 
 @Entity
-@Table(name="person")
+@Table(name = "person")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,4 +22,12 @@ public class Person {
     private String pesel;
     private int age;
     private boolean didRent;
+
+    public void updateFrom(Person source) {
+        this.name = source.name;
+        this.lastName = source.lastName;
+        this.pesel = source.pesel;
+        this.age = source.age;
+        this.didRent = source.didRent;
+    }
 }

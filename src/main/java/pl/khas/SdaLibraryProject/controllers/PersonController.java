@@ -4,14 +4,12 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.khas.SdaLibraryProject.model.Person;
 import pl.khas.SdaLibraryProject.repositories.PersonRepository;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/person")
@@ -30,6 +28,33 @@ import java.net.URI;
         ResponseEntity<Person> created = ResponseEntity.created(URI.create("/" + result.getId())).body(result);
         logger.info("created new object " + result.toString());
         return created;
+    }
+
+    @GetMapping(params = {"!sort"})
+    ResponseEntity<List<Person>> readAllTasks() {
+        logger.warn("Exposing all the Persons!");
+        return ResponseEntity.ok(personRepository.findAll());
+    }
+
+
+    @GetMapping("/{id}")
+    ResponseEntity<Person> readTask(@PathVariable int id) {
+        return personRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody @Valid Person toUpdate) {
+        if (!personRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        personRepository.findById(id)
+                .ifPresent(person -> {
+                    person.updateFrom(toUpdate);
+                    personRepository.save(person);
+                });
+        return ResponseEntity.noContent().build();
     }
 
 
