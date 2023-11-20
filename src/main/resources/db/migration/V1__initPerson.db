@@ -1,12 +1,12 @@
 -- Drop the table if it exists
 DROP TABLE IF EXISTS person;
 
--- Create the liquor table
+-- Create the person table
 CREATE TABLE person (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     lastname VARCHAR(100) NOT NULL,
     pesel VARCHAR(100) NOT NULL,
     age INT,
-    didRent BOOLEAN
+    didRent BIT
 )
