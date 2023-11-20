@@ -7,7 +7,7 @@ CREATE TABLE person (
     name VARCHAR(100) NOT NULL,
     lastname VARCHAR(100) NOT NULL,
     pesel VARCHAR(100) NOT NULL,
-    age INTEGER,
-    didRent BOOLEAN,
-    volume INT
+    age INT,
+    didRent BIT
+
 )
