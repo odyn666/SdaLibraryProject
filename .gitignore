@@ -34,4 +34,4 @@ build/
 
 
 ### Database ###
-/db.mv.db
+db.mv.db
