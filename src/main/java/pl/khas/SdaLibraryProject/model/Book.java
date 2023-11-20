@@ -14,4 +14,6 @@ public class Book {
     private String title;
     private Author authors;
     private Set<Genre> genres;
+    private int pages;
+    private Alley alley;
 }
