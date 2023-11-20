@@ -13,6 +13,5 @@ import lombok.Setter;
 public class Author {
     private String name;
     private String lastName;
-    private String pesel;
     private int age;
 }

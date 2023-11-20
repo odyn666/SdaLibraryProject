@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Alley {
-    private long capacity; // w książkach
+    private long capacity; // w ksiazkach
     private String name;
 
     public Alley(String name) {
