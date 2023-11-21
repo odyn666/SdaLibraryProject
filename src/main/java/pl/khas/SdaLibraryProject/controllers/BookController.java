@@ -21,7 +21,7 @@ public class BookController {
     ResponseEntity<Book> createBook(@RequestBody Book toCreate) {
         Book result = bookRepository.save(toCreate);
         ResponseEntity<Book> created = ResponseEntity.created(URI.create("/" + result.getId())).body(result);
-        log.info("created new object " + result.toString());
+        log.info("created new object " + result);
         return created;
     }
 
@@ -30,14 +30,14 @@ public class BookController {
         log.warn("Exposing all Books!");
         return ResponseEntity.ok(bookRepository.findAll());
     }
-
+    @GetMapping("/id/{id}")
     ResponseEntity<Book> readTask(@PathVariable int id) {
         return bookRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/id")
+    @PutMapping("/{id}")
     ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody Book toUpdate) {
         if (!bookRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -48,5 +48,25 @@ public class BookController {
                     bookRepository.save(book);
                 });
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/title/{title}")
+    ResponseEntity<List<Book>> findByTitle(@PathVariable String title) {
+        return ResponseEntity.of(bookRepository.findByTitle(title));
+    }
+
+    @GetMapping("/authors/{authors}")
+    ResponseEntity<List<Book>> findByAuthors(@PathVariable String authors) {
+        return ResponseEntity.of(bookRepository.findByAuthors(authors));
+    }
+
+    @GetMapping("/genres/{genres}")
+    ResponseEntity<List<Book>> findByGenres(@PathVariable String genres) {
+        return ResponseEntity.of(bookRepository.findByGenres(genres));
+    }
+
+    @PostMapping
+    boolean isRented(Book book) {
+        return book.isRented();
     }
 }

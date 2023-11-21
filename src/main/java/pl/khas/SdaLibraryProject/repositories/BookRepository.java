@@ -9,9 +9,9 @@ import java.util.Optional;
 @Repository
 public interface BookRepository {
     List<Book> findAll();
-    List<Book> findByTitle(String title);
-    List<Book> findByAuthors(String authors);
-    List<Book> findByGenres(String genres);
+    Optional<List<Book>> findByTitle(String title);
+    Optional<List<Book>> findByAuthors(String authors);
+    Optional<List<Book>> findByGenres(String genres);
     Optional<Book> findById(int id);
     Book save(Book entity);
     boolean isRented(Book entity);

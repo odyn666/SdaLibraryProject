@@ -36,7 +36,7 @@ import java.util.List;
     ResponseEntity<Person> readTask(@PathVariable int id) {
         return personRepository.findById(id)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
